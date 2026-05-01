@@ -9,6 +9,7 @@ networks:
         - subnet: 172.18.0.0/16
 
 volumes:
+  traefik-dynamic:
   authelia-secrets:
   authelia-data:
   lldap-data:
@@ -33,8 +34,19 @@ secrets:
 services:
 
   habitat-config:
-    # Main definition provided by core module (habitat-path)
+    image: tschebbischeff/habitat-config:latest
+    container_name: ${APP_NAME_HOST}_habitat-config
+    restart: no
+    env_file:
+      - ./.env
+      - path: ${ENV_DIR}/.env
+        required: false
+      - path: ${ENV_DIR}/habitat-config.env
+        required: false
+    networks:
+      internal:
     volumes:
+      - traefik-dynamic:/habitat-config/target/traefik
       - ./habitat-config/config:/habitat-config/source/${APP_MODULE_NAME}:ro
 
   authelia:
