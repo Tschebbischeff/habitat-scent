@@ -5,7 +5,7 @@ http:
         customRequestHeaders:
           X-Auth-Provider: "authelia"
       forwardAuth:
-        address: "http://{{ env "APP_NAME_HOST" }}_authelia:9091/api/authz/forward-auth"
+        address: 'http://{{ env "APP_NAME_HOST" }}_authelia:9091/api/authz/forward-auth'
         trustForwardHeader: true
         maxResponseBodySize: 1048576 # 1MiB
         authResponseHeaders:
