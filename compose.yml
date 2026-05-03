@@ -33,9 +33,9 @@ secrets:
 
 services:
 
-  habitat-config:
+  habitat-config-scent:
     image: tschebbischeff/habitat-config:latest
-    container_name: ${APP_NAME_HOST}_${APP_MODULE_NAME}_habitat-config
+    container_name: ${APP_NAME_HOST}_habitat-config-scent
     restart: no
     env_file:
       - ./.env
@@ -43,6 +43,8 @@ services:
         required: false
       - path: ${ENV_DIR}/habitat-config.env
         required: false
+    environment:
+      MODULE_NAME: "scent"
     networks:
       internal:
     volumes:
