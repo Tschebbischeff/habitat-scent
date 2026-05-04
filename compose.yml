@@ -131,7 +131,7 @@ services:
     healthcheck:
       # Official healthcheck prints a lot of connection logs, new healthchecks only checks API though
       # test: [ "CMD", "/app/lldap", "healthcheck", "--config-file", "/data/lldap_config.toml" ]
-      test: [ "CMD-SHELL", "wget -qO- 'http://127.0.0.1:17170/health' | grep -qv 'html' || exit 1" ]
+      test: [ "CMD-SHELL", "curl -so /dev/null -w '%{http_code}' 'http://127.0.0.1:17170/health' | grep -q '^200$' || exit 1" ]
       interval: 30s
       timeout: 5s
       retries: 5
