@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-BOOTSTRAP_VERSION="1"
+BOOTSTRAP_VERSION="1" # TODO: This now depends on whether other modules update their config
 
 [ -f "/data/.bootstrapped" ] && [ "$(cat /data/.bootstrapped)" == "$BOOTSTRAP_VERSION" ] && { echo "Bootstrapping already done for current version '$BOOTSTRAP_VERSION'."; exit 0; }
 

@@ -13,6 +13,7 @@ volumes:
   authelia-secrets:
   authelia-data:
   lldap-data:
+  lldap-bootstrap:
 
 
 secrets:
@@ -50,6 +51,7 @@ services:
     volumes:
       - habitat-config:/habitat-config/orchestration
       - ./habitat-config:/habitat-config/source:ro
+      - lldap-bootstrap:/habitat-config/target/lldap
 
   authelia:
     build:
@@ -125,7 +127,7 @@ services:
       - LLDAP_ADMIN_PASSWORD
     volumes:
       - lldap-data:/data
-      - ./lldap/bootstrap:/bootstrap:ro
+      - lldap-bootstrap:/bootstrap:ro
     networks:
       internal:
     healthcheck:
@@ -136,3 +138,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    depends_on:
+      habitat-config-scent:
+        condition: service_completed_successfully
