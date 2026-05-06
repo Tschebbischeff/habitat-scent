@@ -12,6 +12,7 @@ volumes:
   habitat-config:
   authelia-secrets:
   authelia-data:
+  authelia-config:
   lldap-data:
   lldap-bootstrap:
 
@@ -52,6 +53,7 @@ services:
       - habitat-config:/habitat-config/orchestration
       - ./habitat-config:/habitat-config/source:ro
       - lldap-bootstrap:/habitat-config/target/lldap
+      - authelia-config:/habitat-config/target/authelia
 
   authelia:
     build:
@@ -80,7 +82,7 @@ services:
       - GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2
       - LLDAP_ADMIN_PASSWORD
     volumes:
-      - ./authelia/config:/config:ro
+      - authelia-config:/config:ro
       - authelia-secrets:/secrets
       - authelia-data:/data
     networks:
