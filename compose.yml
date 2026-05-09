@@ -59,7 +59,7 @@ services:
     build:
       context: ./authelia
     container_name: ${APP_NAME_HOST}_authelia
-    restart: always
+    restart: unless-stopped
     expose:
       - "9091"
     env_file:
@@ -101,7 +101,7 @@ services:
     build:
       context: ./lldap
     container_name: ${APP_NAME_HOST}_lldap
-    restart: always
+    restart: unless-stopped
     expose:
       - "3890"
       - "17170"
