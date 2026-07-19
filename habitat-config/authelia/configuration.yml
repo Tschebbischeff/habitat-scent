@@ -55,3 +55,13 @@ identity_providers:
           {{ secret "/run/secrets/AUTHELIA_OIDC_JWKS_KEY_PRIVATE" | indent 10 | trimPrefix "          " }}
         algorithm: 'RS256'
         use: 'sig'
+    clients:
+      - client_id: 'stub_client'
+        client_name: 'Stub Client'
+        client_secret: '$pbkdf2-sha512$310000$xLaEduCvJub4g1QEiafUAQ$HkpVyPR7dsyUL4FWU75KAD1JD94fTf54zI9TKR6sqf.lOqPcEx5NtTlZ9L/FwslrL7J3v9xzA6mHqt/8NJ/jvw'
+        public: false
+        authorization_policy: 'one_factor'
+        redirect_uris:
+          - 'https://lldap.{{ env "APP_HOST" }}'
+        scopes:
+          - 'openid'
