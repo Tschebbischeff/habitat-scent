@@ -114,8 +114,6 @@ SECRETS_DIR="/run/secrets"
 | :-- | :-- | :-- |
 | `AUTHELIA_OIDC_HMAC_SECRET` | Randomly generated HMAC key to secure OIDC. | [Authelia Docs: Generate Random Alphanumeric String](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string) |
 | `AUTHELIA_OIDC_JWKS_KEY_PRIVATE` | Randomly generated private key to sign and verify OIDC tokens (multiline). | [Authelia Docs: Generate RSA Keypair](https://www.authelia.com/reference/guides/generating-secure-values/#generating-an-rsa-keypair) |
-| `GRAFANA_OAUTH_CLIENT_ID` | Randomly generated OAuth client ID for Grafana. | [Authelia Docs: Generate Client ID](https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#client-id--identifier) |
-| `GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2` | PBKDF2 digest of `GRAFANA_OAUTH_CLIENT_SECRET`. | [Authelia Docs: Generate Client Secret](https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#client-secret) |
 | `LLDAP_JWT_SECRET` | Randomly generated string. | [LLDAP generate_secrets.sh](https://github.com/lldap/lldap/blob/main/generate_secrets.sh) |
 | `LLDAP_KEY_SEED` | Randomly generated string. | [LLDAP generate_secrets.sh](https://github.com/lldap/lldap/blob/main/generate_secrets.sh) |
 | `LLDAP_ADMIN_PASSWORD` | Password for the initial admin account. | Your preferred method. |
