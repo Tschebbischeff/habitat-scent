@@ -3,9 +3,9 @@
 set -e
 set -o pipefail
 
-BOOTSTRAP_VERSION="1" # TODO: This now depends on whether other modules update their config
+# BOOTSTRAP_VERSION="1" # TODO: This now depends on whether other modules update their config
 
-[ -f "/data/.bootstrapped" ] && [ "$(cat /data/.bootstrapped)" == "$BOOTSTRAP_VERSION" ] && { echo "Bootstrapping already done for current version '$BOOTSTRAP_VERSION'."; exit 0; }
+# [ -f "/data/.bootstrapped" ] && [ "$(cat /data/.bootstrapped)" == "$BOOTSTRAP_VERSION" ] && { echo "Bootstrapping already done for current version '$BOOTSTRAP_VERSION'."; exit 0; }
 
 tmpBootstrapDir="$(mktemp -d)"
 trap 'rm -rf "$tmpBootstrapDir"' EXIT
@@ -28,5 +28,5 @@ for subDir in "user-configs" "group-configs" "user-schemas" "group-schemas"; do
 done
 
 /app/bootstrap.sh
-printf '%s' "$BOOTSTRAP_VERSION" >"/data/.bootstrapped"
+# printf '%s' "$BOOTSTRAP_VERSION" >"/data/.bootstrapped"
 exit 0
