@@ -3,7 +3,7 @@
   "email": "${LLDAP_ADMIN_USERNAME}@${APP_HOST}",
   "password": "${LLDAP_ADMIN_PASSWORD}",
   "displayName": "Administrator",
-  "firstName": "Admin",
+  "firstName": "Administrator",
   "groups": [
     "lldap_admin",
     "admins"
