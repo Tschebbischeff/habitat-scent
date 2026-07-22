@@ -14,6 +14,7 @@ http:
       service: svc_authelia-9091
       entryPoints: ["websecure"]
       middlewares:
+        - "sts-headers"
         - "cors-policy"
       tls:
         certResolver: porkbun-api
