@@ -108,7 +108,6 @@ services:
     environment:
       UID: "0"
       GID: "0"
-      TZ: "${TIMEZONE}"
       LLDAP_JWT_SECRET_FILE: "/run/secrets/LLDAP_JWT_SECRET"
       LLDAP_KEY_SEED: "/run/secrets/LLDAP_KEY_SEED"
       LLDAP_KEY_FILE: ""
