@@ -27,7 +27,7 @@ cat >"$SOURCE_FILE_APP_SITE" <<'EOF'
 - title: LLDAP
   url: https://lldap.${APP_HOST}
   check-url: http://${APP_NAME_HOST}_lldap:17170
-  icon: /assets/icons/di/lldap-dark.svg
+  icon: auto-invert /assets/icons/di/lldap-black.svg
 EOF
 
 cat >"$SOURCE_FILE_DEV_REPOSITORIES" <<'EOF'
