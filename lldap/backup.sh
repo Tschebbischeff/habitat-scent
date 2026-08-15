@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 export ANY_FAILURE=""
 BASE_PATH="/data"
@@ -20,13 +20,10 @@ echo "Starting backup of '$BASE_PATH' to '$BACKUP_DIR'..."
 find "$BASE_PATH" -type f | sort | while read -r filePath; do
     backupPath="$BACKUP_DIR/${filePath#"$BASE_PATH"/}"
     fileExtension=""
-    case "$(basename "$filePath")" in
-        ?*.*)
-            fileExtension="${filePath##*.}" ;;
-    esac
+    [[ "$(basename "$filePath")" == ?*.* ]] && fileExtension="${filePath##*.}"
     echo "Backing up '$filePath' to '$backupPath'"
     mkdir -p "$(dirname "$backupPath")"
-    if [ "$fileExtension" = "db" ] || [ "$fileExtension" = "sqlite" ] || [ "$fileExtension" = "sqlite3" ]; then
+    if [ "$fileExtension" == "db" ] || [ "$fileExtension" == "sqlite" ] || [ "$fileExtension" == "sqlite3" ]; then
         echo "Extension is '$fileExtension' => Hot backup of SQLite database"
         sqlite3 "$filePath" ".backup '$backupPath'"
         exitCode="$?"; [ "$exitCode" -ne "0" ] && backupFailed "$filePath" "$exitCode"
