@@ -26,6 +26,11 @@ rm "$tmpCronFile"
 crond -b -l 2
 
 env
+echo "--"
+which authelia
+echo "--"
+ls -la /app
+echo "-- DEBUG SLEEP 10..."
 
 sleep 10
 

@@ -14,5 +14,6 @@ RUN chmod +x /entrypoint-hook.sh
 # PATH="/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV PATH="/app:$PATH"
 
+WORKDIR /app
 ENTRYPOINT ["/entrypoint-hook.sh"]
 CMD ["authelia", "--config", "/config/configuration.yml"]
