@@ -1,6 +1,15 @@
 FROM alpine:latest AS builder
 
-RUN apk add --no-cache busybox-static sqlite-static
+RUN apk add --no-cache curl build-base
+RUN SQLITE_URL="https://www.sqlite.org/$(wget -qO- https://www.sqlite.org/download.html | grep -oE '[0-9]{4}/sqlite-autoconf-[0-9]+\.tar\.gz' | head -n 1)" && \
+    curl -L -o /tmp/sqlite.tar.gz "$SQLITE_URL" && \
+    mkdir -p /tmp/sqlite && \
+    tar -xzf /tmp/sqlite.tar.gz -C /tmp/sqlite --strip-components=1 && \
+    cd /tmp/sqlite && \
+    ./configure CFLAGS="-DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_RTREE" LDFLAGS="-static" && \
+    make -j$(nproc) && \
+    mv sqlite3 /usr/bin/sqlite3 && \
+    chmod +x /usr/bin/sqlite3
 
 FROM authelia/authelia:latest
 
