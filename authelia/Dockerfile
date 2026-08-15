@@ -9,6 +9,7 @@ COPY --from=builder /usr/bin/sqlite3 /usr/bin/sqlite3
 
 # RUN ln -s /bin/busybox /bin/crontab && \
 #     ln -s /bin/busybox /bin/crond
+RUN ln -s /usr/bin/env /bin/env
 
 COPY ./backup.sh /backup.sh
 RUN chmod +x /backup.sh
