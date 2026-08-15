@@ -25,4 +25,8 @@ rm "$tmpCronFile"
 
 crond -b -l 2
 
+env
+
+sleep 10
+
 exec "$@"
