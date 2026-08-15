@@ -17,7 +17,9 @@ backupFailed() {
 
 echo "Starting backup of '$BASE_PATH' to '$BACKUP_DIR'..."
 
-find "$BASE_PATH" -type f | sort | while read -r filePath; do
+tmpFindFile="$(mktemp)"
+find "$BASE_PATH" -type f | sort >"$tmpFindFile"
+while IFS= read -r filePath; do
     backupPath="$BACKUP_DIR/${filePath#"$BASE_PATH"/}"
     fileExtension=""
     case "$(basename "$filePath")" in
@@ -35,9 +37,16 @@ find "$BASE_PATH" -type f | sort | while read -r filePath; do
         cp -a "$filePath" "$backupPath"
         exitCode="$?"; [ "$exitCode" -ne "0" ] && backupFailed "$filePath" "$exitCode"
     fi
-done
+done <"$tmpFindFile"
+rm "$tmpFindFile"
 
 echo "Cleaning up backups older than $RETENTION_DAYS days..."
 find "/backups/$(basename "$BASE_PATH")" -mindepth 1 -maxdepth 1 -type d -mtime +"$RETENTION_DAYS" -exec rm -rf {} +
 
-{ [ -z "$ANY_FAILURE" ] && echo "Backup job completed successfully."; } || { echo "Backup job caused errors." && exit 1; }
+{
+    [ -z "$ANY_FAILURE" ] && echo "Backup job completed successfully.";
+} || {
+    echo "Backup job caused errors."
+    rm -rf "$BACKUP_DIR"
+    exit 1
+}
