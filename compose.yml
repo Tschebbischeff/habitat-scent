@@ -79,6 +79,7 @@ services:
       - authelia-config:/config:ro
       - authelia-secrets:/secrets
       - authelia-data:/data
+      - ${VOLUME_DIR}/authelia-backups:/backups
     networks:
       internal:
     healthcheck:
@@ -123,6 +124,7 @@ services:
     volumes:
       - lldap-data:/data
       - lldap-bootstrap:/bootstrap:ro
+      - ${VOLUME_DIR}/lldap-backups:/backups
     networks:
       internal:
     healthcheck:
