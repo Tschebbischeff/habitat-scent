@@ -2,7 +2,7 @@
 
 BASE_PATH="/data"
 RETENTION_DAYS="${LLDAP_BACKUP_RETENTION_DAYS:-2}"
-BACKUP_DIR="/backups/${BASE_PATH#/}/$(TZ="UTC" date +"%Y-%m-%dT%H:%M:%SZ")"
+BACKUP_DIR="/backups/$(basename "$BASE_PATH")/$(TZ="UTC" date +"%Y-%m-%dT%H:%M:%SZ")"
 mkdir -p "$BACKUP_DIR"
 
 backupFailed() {
@@ -29,6 +29,6 @@ find "$BASE_PATH" -type f | sort | while read -r filePath; do
 done
 
 echo "Cleaning up backups older than $RETENTION_DAYS days..."
-find "/backups/${BASE_PATH#/}" -type d -mindepth 1 -maxdepth 1 -mtime +"$RETENTION_DAYS" -exec rm -rf {} +
+find "/backups/$(basename "$BASE_PATH")" -type d -mindepth 1 -maxdepth 1 -mtime +"$RETENTION_DAYS" -exec rm -rf {} +
 
 echo "Backup job completed successfully."
