@@ -6,8 +6,8 @@ RUN SQLITE_URL="https://www.sqlite.org/$(wget -qO- https://www.sqlite.org/downlo
     mkdir -p /tmp/sqlite && \
     tar -xzf /tmp/sqlite.tar.gz -C /tmp/sqlite --strip-components=1 && \
     cd /tmp/sqlite && \
-    ./configure CFLAGS="-DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_RTREE" LDFLAGS="-static" && \
-    make -j$(nproc) && \
+    ./configure --enable-static --disable-shared CFLAGS="-DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_RTREE" && \
+    make -j$(nproc) LDFLAGS="-all-static" sqlite3 && \
     mv sqlite3 /usr/bin/sqlite3 && \
     chmod +x /usr/bin/sqlite3
 
