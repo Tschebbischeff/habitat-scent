@@ -1,6 +1,7 @@
 FROM alpine:latest AS builder
 
-RUN apk add --no-cache curl build-base
+RUN apk upgrade --no-cache -a; \
+    apk add --no-cache curl build-base
 RUN SQLITE_URL="https://www.sqlite.org/$(wget -qO- https://www.sqlite.org/download.html | grep -oE '[0-9]{4}/sqlite-autoconf-[0-9]+\.tar\.gz' | head -n 1)" && \
     curl -L -o /tmp/sqlite.tar.gz "$SQLITE_URL" && \
     mkdir -p /tmp/sqlite && \
