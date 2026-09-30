@@ -10,7 +10,7 @@ http:
           - url: 'http://{{ env "APP_NAME_HOST" }}_authelia:9091'
   routers:
     authelia-9091:
-      rule: 'Host(`authelia.{{ env "APP_HOST" }}`)'
+      rule: 'Host(`{{ env "APP_AUTH_HOST" }}`)'
       service: svc_authelia-9091
       entryPoints: ["websecure"]
       middlewares:
