@@ -40,14 +40,17 @@ notifier:
 access_control:
   default_policy: deny
   rules:
-    - domain: '*.authelia.{{ env "APP_HOST" }}'
+    - domain:
+        - 'authelia.{{ env "APP_HOST" }}'
+        - '*.authelia.{{ env "APP_HOST" }}'
       policy: bypass
-    - domain: '*.lldap.{{ env "APP_HOST" }}'
+    - domain:
+        - 'lldap.{{ env "APP_HOST" }}'
+        - '*.lldap.{{ env "APP_HOST" }}'
       policy: bypass
-    - domain: '*.{{ env "APP_HOST" }}'
-      subject: 'group:admins'
-      policy: one_factor
-    - domain: '{{ env "APP_HOST" }}'
+    - domain:
+        - '{{ env "APP_HOST" }}'
+        - '*.{{ env "APP_HOST" }}'
       subject: 'group:admins'
       policy: one_factor
 
