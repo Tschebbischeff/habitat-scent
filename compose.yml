@@ -54,6 +54,8 @@ services:
   authelia:
     build:
       context: ./authelia
+      args:
+        AUTHELIA_VERSION: "${AUTHELIA_VERSION:?}"
     container_name: ${APP_NAME_HOST}_authelia
     restart: unless-stopped
     expose:
@@ -95,6 +97,8 @@ services:
   lldap:
     build:
       context: ./lldap
+      args:
+        LLDAP_VERSION: "${LLDAP_VERSION:?}"
     container_name: ${APP_NAME_HOST}_lldap
     restart: unless-stopped
     expose:

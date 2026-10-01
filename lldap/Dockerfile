@@ -1,4 +1,5 @@
-FROM lldap/lldap:stable
+ARG LLDAP_VERSION
+FROM lldap/lldap:${LLDAP_VERSION}
 
 RUN apk upgrade --no-cache -a; \
     apk add --no-cache envsubst dcron grep sqlite

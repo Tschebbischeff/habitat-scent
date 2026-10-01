@@ -1,3 +1,4 @@
+ARG AUTHELIA_VERSION
 FROM alpine:latest AS builder
 
 RUN apk upgrade --no-cache -a; \
@@ -12,7 +13,7 @@ RUN SQLITE_URL="https://www.sqlite.org/$(wget -qO- https://www.sqlite.org/downlo
     mv sqlite3 /usr/bin/sqlite3 && \
     chmod +x /usr/bin/sqlite3
 
-FROM authelia/authelia:latest
+FROM authelia/authelia:${AUTHELIA_VERSION}
 
 COPY --from=builder /usr/bin/sqlite3 /usr/bin/sqlite3
 

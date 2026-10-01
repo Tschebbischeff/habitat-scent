@@ -104,9 +104,11 @@ SECRETS_DIR="/run/secrets"
 
 | Name | Description | Example | Default |
 | :-- | :-- | :-- | :-- |
-| `AUTHELIA_COOKIE_DOMAIN` | The domain at which authelia should store the session cookies, allowing all subdomains to use this auth layer. Must be a suffix of `APP_HOST`.  | `my-project.example.com` | `authelia.$APP_HOST` |
+| `AUTHELIA_VERSION` | Tag for the [Authelia docker image](https://hub.docker.com/r/authelia/authelia). | `4.39` | `latest` |
+| `AUTHELIA_COOKIE_DOMAIN` | The domain at which authelia should store the session cookies, allowing all subdomains to use this auth layer. Must be a suffix (or match) of `APP_HOST`.  | `my-project.example.com` | `$APP_HOST` |
 | `AUTHELIA_BACKUP_SCHEDULE` | A cron schedule in the form of `M H DoM MoY DoW`, determining when the Authelia `/data` directory is backed up to `/backup`. | `30 23 * * *` | `30 1 * * *` |
 | `AUTHELIA_BACKUP_RETENTION_DAYS` | The amount of time in days since an Authelia backup has been last modified until it is deleted. | `7` | `2` |
+| `LLDAP_VERSION` | Tag for the [LLDAP docker image](https://hub.docker.com/r/lldap/lldap). | `stable-alpine-rootless` | `stable` |
 | `LLDAP_BACKUP_SCHEDULE` | A cron schedule in the form of `M H DoM MoY DoW`, determining when the LLDAP `/data` directory is backed up to `/backup`. | `30 23 * * *` | `30 1 * * *` |
 | `LLDAP_BACKUP_RETENTION_DAYS` | The amount of time in days since an LLDAP backup has been last modified until it is deleted. | `7` | `2` |
 
